@@ -67,9 +67,8 @@ const posts = await pikku.find({
 ## Example Collection File
 
 ```json
-// /static/data/posts.json
 {
-  "config": {
+  "_config": {
     "fields": [
       { "name": "title", "type": "text" },
       { "name": "published", "type": "checkbox" }
@@ -77,7 +76,7 @@ const posts = await pikku.find({
   },
   "data": [
     {
-      "id": "abc123",
+      "id": "16e79f1c-3fa9-4697-82bc-30d443170a95",
       "title": "Hello world",
       "published": true
     }
