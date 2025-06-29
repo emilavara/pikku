@@ -1,0 +1,14 @@
+.pikku-collection-item {
+    display: flex;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+}
+
+.pikku-no-collections {
+    text-align: center;
+}
+
+.pikku-no-collections button {
+    margin-top: 1rem;
+}

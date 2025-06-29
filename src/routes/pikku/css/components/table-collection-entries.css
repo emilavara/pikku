@@ -1,0 +1,48 @@
+.pikku-table-collection-entries {
+    margin-top: 24px;
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        table-layout: fixed;
+
+        thead {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted-text);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+
+            th {
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        tbody {
+            
+            tr {
+                border-bottom: 1px solid var(--border-color);
+                cursor: pointer;
+
+                &:hover {
+                    background: var(--pikku-sidebar-bg);
+                }
+            }
+            
+            
+            td {
+                height: 48px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 64px;
+            }
+        }
+    }
+}
+
+.pikku-table-column-fit-width {
+    width: fit-content;
+}   

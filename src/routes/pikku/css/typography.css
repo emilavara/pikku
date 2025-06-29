@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css');
+
+.muted-text {
+    color: var(--muted-text);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &.no-uppercase {
+        text-transform: none;
+    }
+}
+
+.white-text {
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.modal-title {
+    font-size: 12px;
+    color: white;
+}
