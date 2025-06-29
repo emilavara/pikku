@@ -5,18 +5,15 @@ No database. No auth. No config. Just JSON.
 
 ---
 
-## ⚡ What is Pikku?
+## What is pikku?
 
-**Pikku** is a super-lightweight content management system for developers who want the power of structured content — without the overhead of full-stack complexity.
+**pikku** (pronounced 'pico'), is a super-lightweight content management system for developers who want the power of structured content — without the overhead of full-stack complexity.
 
-It's designed to run **during development**, saving data as flat `.json` files you can version control, ship statically, or feed into your frontend however you like.
-
-> Tiny enough to forget.  
-> Powerful enough to build with.
+It's designed to run **during development**, saving data as flat `.json` files you can version control, **ship statically**, or feed into your frontend however you like.
 
 ---
 
-## ✨ Features
+## Features
 
 - 🧾 **File-based** — One JSON file per collection
 - 🎛 **Custom schemas** — Define fields in the UI
@@ -32,7 +29,6 @@ import pikku from '$lib/pikkuClient.js'
 const posts = await pikku.find({
     collection: 'posts',
     where: {
-        published: { equals: true },
         title: { contains: 'summer' }
     }
 })
@@ -40,7 +36,7 @@ const posts = await pikku.find({
 
 ---
 
-## 🛠 File Structure (default)
+## Default File Structure
 
 ```
 /src/
@@ -57,7 +53,7 @@ const posts = await pikku.find({
 
 ---
 
-## 🚧 How It Works
+## How It Works
 
 - Each **collection** is a single JSON file.
 - Each collection has a `config` (fields) and `data` (entries).
@@ -66,7 +62,7 @@ const posts = await pikku.find({
 
 ---
 
-## 🧪 Example Collection File
+## Example Collection File
 
 ```json
 // /static/data/posts.json
@@ -89,7 +85,7 @@ const posts = await pikku.find({
 
 ---
 
-## 🧠 Why Pikku?
+## Why Pikku?
 
 Because sometimes you don't want:
 - A full-blown CMS
@@ -101,17 +97,7 @@ You just want a little UI that edits some `.json`.
 
 ---
 
-## 🤖 Use Cases
-
-- Side projects
-- Landing pages
-- Design systems with editable content
-- Static sites with occasional dynamic config
-- Prototypes, one-pagers, internal tools
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
 git clone your-project
@@ -124,7 +110,7 @@ Then visit: `http://localhost:5173/pikku`
 
 ---
 
-## 📦 Coming soon
+## Roadmap
 
 - More field types
 - Drag & drop field editor
@@ -134,11 +120,11 @@ Then visit: `http://localhost:5173/pikku`
 
 ---
 
-## ❤️ Credits
+## Credits
 
-Built with SvelteKit, frustration, and love.  
+Built with SvelteKit, coffee, and love.  
 The name _Pikku_ means "small" in Finnish.
 
 ---
 
-## 🐜 Pikku: small on purpose.
+## pikku: small on purpose.
