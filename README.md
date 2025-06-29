@@ -1,5 +1,7 @@
-# 🐜 pikku
-
+<p align="center">
+  <img src="static/pikku_logo.svg" alt="Pikku logo" width="100%" style="max-width: 800px;" />
+</p>
+      
 **The tiny CMS that stays out of your way.**  
 No database. No auth. No config. Just JSON.
 
