@@ -1,38 +1,144 @@
-# sv
+# 🐜 pikku
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+**The tiny CMS that stays out of your way.**  
+No database. No auth. No config. Just JSON.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## ⚡ What is Pikku?
 
-```bash
-# create a new project in the current directory
-npx sv create
+**Pikku** is a super-lightweight content management system for developers who want the power of structured content — without the overhead of full-stack complexity.
 
-# create a new project in my-app
-npx sv create my-app
+It's designed to run **during development**, saving data as flat `.json` files you can version control, ship statically, or feed into your frontend however you like.
+
+> Tiny enough to forget.  
+> Powerful enough to build with.
+
+---
+
+## ✨ Features
+
+- 🧾 **File-based** — One JSON file per collection
+- 🎛 **Custom schemas** — Define fields in the UI
+- ⚡ **Fast as hell** — No ORM, no serialization, just instant reads
+- 🧘 **No setup** — Works out of the box in dev
+- 💅 **Scoped UI** — Dashboard styles don’t leak into your frontend
+- 🚀 **Frontend-agnostic** — Use with any stack: Svelte, Next, Astro, etc.
+- 🧱 **Composable** — Import data like this:
+
+```js
+import pikku from '$lib/pikkuClient.js'
+
+const posts = await pikku.find({
+    collection: 'posts',
+    where: {
+        published: { equals: true },
+        title: { contains: 'summer' }
+    }
+})
 ```
 
-## Developing
+---
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## 🛠 File Structure (default)
+
+```
+/src/
+  /routes/
+    +page.svelte         ← your frontend
+    /pikku/              ← the CMS dashboard
+    /api/pikku/          ← read/write JSON APIs
+
+/static/
+  /data/
+    posts.json           ← your collections
+    products.json
+```
+
+---
+
+## 🚧 How It Works
+
+- Each **collection** is a single JSON file.
+- Each collection has a `config` (fields) and `data` (entries).
+- All editing happens through the `/pikku` dashboard.
+- In production, JSON is read-only and treated as static content.
+
+---
+
+## 🧪 Example Collection File
+
+```json
+// /static/data/posts.json
+{
+  "config": {
+    "fields": [
+      { "name": "title", "type": "text" },
+      { "name": "published", "type": "checkbox" }
+    ]
+  },
+  "data": [
+    {
+      "id": "abc123",
+      "title": "Hello world",
+      "published": true
+    }
+  ]
+}
+```
+
+---
+
+## 🧠 Why Pikku?
+
+Because sometimes you don't want:
+- A full-blown CMS
+- A running database
+- Token auth, sessions, middleware
+- Serverless cold starts
+
+You just want a little UI that edits some `.json`.
+
+---
+
+## 🤖 Use Cases
+
+- Side projects
+- Landing pages
+- Design systems with editable content
+- Static sites with occasional dynamic config
+- Prototypes, one-pagers, internal tools
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+git clone your-project
+cd your-project
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Then visit: `http://localhost:5173/pikku`
 
-To create a production version of your app:
+---
 
-```bash
-npm run build
-```
+## 📦 Coming soon
 
-You can preview the production build with `npm run preview`.
+- More field types
+- Drag & drop field editor
+- Entry-level hooks
+- Import/export tools
+- Deployment-friendly read-only UI
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+---
+
+## ❤️ Credits
+
+Built with SvelteKit, frustration, and love.  
+The name _Pikku_ means "small" in Finnish.
+
+---
+
+## 🐜 Pikku: small on purpose.
