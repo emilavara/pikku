@@ -126,7 +126,3 @@ Then visit: `http://localhost:5173/pikku`
 
 Built with SvelteKit, coffee, and love.  
 The name _Pikku_ means "small" in Finnish.
-
----
-
-## pikku: small on purpose.
