@@ -23,7 +23,7 @@ It's designed to run **during development**, saving data as flat `.json` files y
 - ⚡ **Fast as hell** — No ORM, no serialization, just instant reads
 - 🧘 **No setup** — Works out of the box in dev
 - 💅 **Scoped UI** — Dashboard styles don’t leak into your frontend
-- 🚀 **Frontend-agnostic** — Use with any stack: Svelte, Next, Astro, etc.
+- 🚀 **Frontend-agnostic... (Soon™)** — Use with any stack: Svelte, Next, Astro, etc.
 - 🧱 **Composable** — Import data like this:
 
 ```js
