@@ -160,4 +160,30 @@ body.pikku * {
         border: 3px solid var(--pikku-bg);
         border-radius: 8px;
     }
+
+    select {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        font-family: 'JetBrains Mono';
+        height: 38px;
+        color: white;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        appearance: base-select;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 0;
+        padding-left: 12px;
+
+        &, &::picker(select) {
+            background: #050505;
+            color: white;
+            outline: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    }
 }

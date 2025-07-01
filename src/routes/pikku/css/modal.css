@@ -22,38 +22,92 @@
 
     .pikku-modal-content {
         max-height: calc(600px - 96px);
+        padding: 12px;
         overflow-y: scroll;
+        
 
-        ul {
-            padding: 0;
+        .field-input-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 16px;
 
-            li {
+            .field-input-container, .select-option {
                 display: flex;
-                width: 100%;
-                gap: 8px;
+                gap: 0.5rem;
+                margin-left: -12px;
+                margin-right: -12px;
+                padding: 12px;
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: column;
 
-                input[type=text], select {
-                    height: 32px;
-                    appearance: none;
-                    background: transparent;
-                    color: white;
-                    font-family: 'JetBrains Mono';
+                &:first-of-type {
+                    padding-top: 0;
+                }
+
+                .field {
+                    display: flex;
+                    gap: 0.5rem;
+                }
+
+                .select-option {
+                    flex-direction: row;
+                    border-bottom: 0;
                     padding: 0 12px;
+
+                    input[type=text] {
+                        color: #8d8d8d !important;
+                    }
+                }
+                
+                input[type=text] {
+                    width: 50%;
+                    background-color: transparent;
                     border: 1px solid var(--border-color);
+                    padding: 0 12px;
+                    font-family: 'JetBrains Mono';
+                    color: white;
+                    font-weight: 700;
                     font-size: 12px;
-                    flex: 100%;
 
                     &:focus {
                         outline: none;
                     }
+
+                    &::placeholder {
+                        text-transform: uppercase;
+                        color: var(--muted-text);
+                    }
+                }
+
+                select {
+                    width: 35%;
+                    background-color: transparent;
+                    border: 1px solid var(--border-color);
+                    padding: 0 12px;
+                    font-family: 'JetBrains Mono';
+                    color: white;
+                    font-weight: 700;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    appearance: base-select;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    border-radius: 0;
+
+                    &, &::picker(select) {
+                        background: #050505;
+                        color: white;
+                        /* border: 1px solid var(--border-color); */
+                        outline: none;
+                        border-radius: 0;
+                        box-shadow: none;
+                    }
                 }
 
                 button {
-                    flex: 1 0 32px;
-                    font-size: 12px;
+                    width: 15%;
+                    padding: 0;
+                    text-align: center;
                 }
             }
         }

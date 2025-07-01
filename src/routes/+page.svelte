@@ -5,7 +5,9 @@
     let posts = []
 
     onMount(async () => {
-        posts = await pikku.find({ collection: 'blog' })
+        posts = await pikku.find({ 
+            collection: 'products'
+        })
     })
 </script>
 

@@ -30,7 +30,7 @@
 
     onDestroy(() => {
         //remvoe save shortcut event listener
-        document.removeEventListener('keydown', handleSaveShortcut);
+        // document.removeEventListener('keydown', handleSaveShortcut);
     })
 
     function handleSaveShortcut(e) {
@@ -98,7 +98,7 @@
         <div class="pikku-content pikku-edit-item-content">
             <form on:submit|preventDefault={save}>
                 {#each fields as field}
-                    <div style="margin-bottom: 2rem;">
+                    <div style="margin-bottom: 1.5rem;">
                         <label>
                             <div class="label">{field.name}</div>
                             {#if field.type === 'text' || field.type === 'date'}
@@ -114,6 +114,12 @@
                                     type="checkbox"
                                     bind:checked={entry[field.name]}
                                 />
+                            {:else if field.type === 'select'}
+                                <select bind:value={entry[field.name]}>
+                                    {#each field.options ?? [] as option}
+                                        <option value={option.value}>{option.label}</option>
+                                    {/each}
+                                </select>
                             {/if}
                         </label>
                     </div>

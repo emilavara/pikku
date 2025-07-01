@@ -1,0 +1,33 @@
+{
+  "_config": {
+    "label": "blog",
+    "fields": [
+      {
+        "name": "title",
+        "type": "text"
+      },
+      {
+        "name": "ingress",
+        "type": "text"
+      },
+      {
+        "name": "body",
+        "type": "textarea"
+      }
+    ]
+  },
+  "data": [
+    {
+      "id": "b78cd045-686f-4dc0-8ae9-837be79a7856",
+      "title": "min första bloggpost22222",
+      "ingress": "min första ingress",
+      "body": "min första bloggpost body text liksom."
+    },
+    {
+      "id": "6d9438bd-c300-4d02-80b2-146034a7ceff",
+      "title": "min andra bloggpost",
+      "ingress": "min andra ingress o så",
+      "body": "min body för den andra bloggposten. tihi"
+    }
+  ]
+}

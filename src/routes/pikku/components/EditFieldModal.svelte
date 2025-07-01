@@ -1,5 +1,6 @@
 <script>
     import { showEditFieldModal } from "../store";
+    import { onMount } from "svelte";
 
     export let fields
     let tempFields = fields
@@ -20,32 +21,49 @@
         <i class="bi bi-x"></i>
     </div>
     <div class="pikku-modal-content">
-        <ul>
+        
+        <div class="field-input-wrapper">
             {#each tempFields as field, i}
-                <li>
-                    <input
-                        type="text"
-                        bind:value={field.name}
-                        placeholder="Field Name"
-                    />
-                    <select bind:value={field.type}>
-                        <option value="text">Text</option>
-                        <option value="textarea">Textarea</option>
-                        <option value="checkbox">Checkbox</option>
-                        <option value="date">Date</option>
-                    </select>
-                    <button on:click={() => removeField(i)} class="square-button" aria-label="delete field">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </li>
+                <div class="field-input-container">
+                    <div class="field">
+                        <input type="text" bind:value={field.name} placeholder="Field Name"/>
+                        <select bind:value={field.type}>
+                            <option value="text">Text</option>
+                            <option value="textarea">Textarea</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="date">Date</option>
+                            <option value="select">Select</option>
+                        </select>
+
+                        <button on:click={() => removeField(i)} class="secondary" aria-label="delete field">
+                            Delete
+                        </button>
+                    </div>
+
+                    <!-- if field type is select -->
+                    {#if field.type === 'select'}
+                        {#each field.options as option, j}
+                                <div class="select-option">
+                                    <input type="text" bind:value={option.label} placeholder="Label"/>
+                                    <input type="text" bind:value={option.value} placeholder="Value"/>
+                                    <button on:click={() => field.options = field.options.filter((_, index) => index !== j)} class="square-button" aria-label="remove select option">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </div>
+                        {/each}
+                        
+                        <button style="width: 100%;" on:click={() => {field.options = [...(field.options ?? []), { label: '', value: '' }]}} class="secondary">Add Option</button>
+                    {/if}
+                </div>
             {/each}
-        </ul>
+        </div>
+            
     </div>
     <div class="pikku-modal-footer" style="justify-content: space-between">
-        <button on:click={() => addField()} class="small">Add field</button>
+        <button on:click={() => addField()} class="small">ADD FIELD</button>
         <div>
-            <button on:click={() => showEditFieldModal.set(false)} class="small secondary">Cancel</button>
-            <button on:click={() => saveFields(tempFields)} class="small">Save</button>
+            <button on:click={() => showEditFieldModal.set(false)} class="small secondary">CANCEL</button>
+            <button on:click={() => saveFields(tempFields)} class="small">SAVE</button>
         </div>
     </div>
 </div>
