@@ -31,7 +31,6 @@
                             <option value="text">Text</option>
                             <option value="textarea">Textarea</option>
                             <option value="checkbox">Checkbox</option>
-                            <option value="date">Date</option>
                             <option value="select">Select</option>
                         </select>
 
@@ -42,10 +41,11 @@
 
                     <!-- if field type is select -->
                     {#if field.type === 'select'}
+                        <p class="muted-text" style="margin-top: 0.75rem;">{field.name} Select Options</p>
                         {#each field.options as option, j}
                                 <div class="select-option">
-                                    <input type="text" bind:value={option.label} placeholder="Label"/>
-                                    <input type="text" bind:value={option.value} placeholder="Value"/>
+                                    <input type="text" bind:value={option.label} placeholder="Option Label"/>
+                                    <input type="text" bind:value={option.value} placeholder="Option Value"/>
                                     <button on:click={() => field.options = field.options.filter((_, index) => index !== j)} class="square-button" aria-label="remove select option">
                                         <i class="bi bi-x"></i>
                                     </button>
