@@ -21,6 +21,7 @@ It's designed to run **during development**, saving data as flat `.json` files y
 - 🎛 **Custom schemas** — Define fields in the UI
 - ⚡ **Fast as hell** — No ORM, no serialization, just instant reads
 - 🧘 **No setup** — Works out of the box in dev
+- 🛸 **Serverless** - Deploy as **read only** on serverless services like Vercel, & Netlify.
 - 🚀 **Frontend-agnostic... (Soon™)** — Use with any stack: Svelte, Next, Astro, etc.
 - 🧱 **Composable** — Import data like this:
 
