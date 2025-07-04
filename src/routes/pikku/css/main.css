@@ -11,6 +11,8 @@ body.pikku {
     font-family: 'JetBrains Mono', monospace;
     color: white;
     background: var(--pikku-bg);
+    overflow: hidden;
+
 }
 
 body.pikku h1, h2, h3, h4, h5, h6,p {

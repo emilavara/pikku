@@ -26,9 +26,11 @@
 
         .pikku-sidebar-collection-container {
             display: flex;
+            text-transform: capitalize;
             flex-direction: column;
             gap: 0.75rem;
             font-size: 14px;
+            margin-bottom: 3rem;
         }
     }
 
@@ -41,4 +43,3 @@
         padding: 24px;
     }
 }
-
