@@ -1,3 +1,5 @@
+// CRUD for for one collection
+
 import fs from 'fs/promises'
 import path from 'path'
 const DATA_DIR = './static/data'

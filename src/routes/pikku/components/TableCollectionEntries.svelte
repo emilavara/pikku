@@ -34,7 +34,17 @@
             {#each entries as entry}
                 <tr on:click={() => goto(`/pikku/${collection}/edit/${entry.id}`)}>
                     {#each fields as field}
-                        <td>{entry[field.name] ?? ''}</td>
+                        <td>
+                            {#if field.type != 'image'}
+                                {entry[field.name] ?? ''}
+                            {/if}
+                            {#if field.type === 'image'}
+                                {#each entry.images as image}
+                                    <img src={image} height="24px"/>
+                                {/each}
+                            {/if}
+                        </td>
+                        
                     {/each}
                     <td>{entry.id}</td>
                 </tr>

@@ -10,7 +10,7 @@ export const GET = async () => {
     }
 
     const files = fs.readdirSync(imagesDir)
-        .filter(file => /\.(webp|png|jpg|jpeg|gif)$/i.test(file))
+        .filter(file => /\.(webp|png|jpg|jpeg|gif|svg)$/i.test(file))
         .map(file => `/images/${file}`);
 
     return json(files);

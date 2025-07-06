@@ -14,6 +14,7 @@
     onMount(async () => {
         const res = await fetch('/api/pikku/collections')
         collections = await res.json()
+        console.log(collections)
     })
 </script>
 
@@ -35,7 +36,7 @@
         <div class={['pikku-content', collections.length === 0 ? 'no-collections' : '']}>
             <div class="pikku-collection-container">
                 {#each collections as collection}
-                    <CollectionItem collectionName={collection}/>
+                    <CollectionItem collectionName={collection.name} collectionCount={collection.count}/>
                 {/each}
                 
                 {#if collections.length === 0}
