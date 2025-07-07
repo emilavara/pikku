@@ -5,6 +5,8 @@ export const showEditFieldModal = writable(false)
 export const showMediaModal = writable(false)
 export const showPickImageModal = writable(false)
 
+export const showEditItemSheet = writable(false)
+
 let idCounter = 0;
 export const toasts = writable([]);
 

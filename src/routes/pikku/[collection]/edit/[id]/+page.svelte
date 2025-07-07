@@ -35,7 +35,7 @@
 
     onDestroy(() => {
         //remvoe save shortcut event listener
-        document.removeEventListener('keydown', handleSaveShortcut);
+        // document.removeEventListener('keydown', handleSaveShortcut);
     })
 
     function handleSaveShortcut(e) {

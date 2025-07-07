@@ -1,0 +1,33 @@
+{
+  "_config": {
+    "label": "blog",
+    "fields": [
+      {
+        "name": "title",
+        "type": "text"
+      },
+      {
+        "name": "body",
+        "type": "textarea"
+      }
+    ]
+  },
+  "data": [
+    {
+      "id": "b0ddb82c-7d86-4ea9-a0c9-05b692f4e567",
+      "images": [],
+      "title": "why tf should i even?",
+      "body": "this is the body for the item thingy."
+    },
+    {
+      "id": "b66d936a-018c-4381-830b-a6d904aaebe4",
+      "title": "hej jag heter emil",
+      "body": "och jag är coolast, efter kaj såklart."
+    },
+    {
+      "id": "54218f58-87c6-4b12-bb36-61887a145274",
+      "title": "hejsan",
+      "body": "hejsannnnn"
+    }
+  ]
+}

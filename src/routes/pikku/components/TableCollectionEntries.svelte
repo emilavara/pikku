@@ -3,6 +3,7 @@
     export let entries
     export let fields
     export let collection
+    export let chooseEntry
 
     async function deleteEntry(id) {
         const confirmed = confirm('Are you sure you want to delete this entry?')
@@ -32,7 +33,8 @@
         </thead>
         <tbody>
             {#each entries as entry}
-                <tr on:click={() => goto(`/pikku/${collection}/edit/${entry.id}`)}>
+                <tr on:click={() => chooseEntry(entry.id)}>
+                <!-- <tr on:click={() => goto(`/pikku/${collection}/edit/${entry.id}`)}> -->
                     {#each fields as field}
                         <td>
                             {#if field.type != 'image'}

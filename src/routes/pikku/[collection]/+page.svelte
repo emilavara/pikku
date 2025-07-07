@@ -1,11 +1,11 @@
 <script>
     import { onMount } from 'svelte'
     import { goto } from '$app/navigation'
-
     
-    import { showCreateCollectionModal, showEditFieldModal, toast } from '../store'
+    import { showCreateCollectionModal, showEditFieldModal, toast, showEditItemSheet } from '../store'
 
     import Sidebar from '../components/Sidebar.svelte';
+    import EditItemSheet from '../components/EditItemSheet.svelte';
     import TableCollectionEntries from '../components/TableCollectionEntries.svelte';
     import TableCollectionFields from '../components/TableCollectionFields.svelte';
     import EditFieldModal from '../components/EditFieldModal.svelte';
@@ -17,6 +17,8 @@
     let fields = []
     let tabContext = 'items'
     let tabButtons = ['items', 'fields']
+    
+    let selectedEntry = []
 
     async function saveFields(newFields) {
         fields = newFields
@@ -38,13 +40,6 @@
 
         showEditFieldModal.set(false)
     }
-
-    onMount(async () => {
-        const res = await fetch(`/api/pikku/collections/${collection}`)
-        const json = await res.json()
-        entries = json.data || []
-        fields = json._config?.fields || []
-    })
 
     async function deleteCollection() {
         const confirmed = confirm(`Are you sure you want to delete the entire "${collection}" collection? This cannot be undone.`)
@@ -74,7 +69,9 @@
         })
         if (res.ok) {
             // alert('Entry created!')
-            goto(`/pikku/${collection}/edit/${newId}`)
+            // goto(`/pikku/${collection}/edit/${newId}`)
+            await fetchItems()
+            chooseEntry(newId);
         } else {
             alert('Failed to create entry.')
         }
@@ -83,6 +80,34 @@
     function setTab(tab) {
         tabContext = tab
     }
+
+    function chooseEntry(selectedId) {
+        const found = entries.find(e => e.id === selectedId)
+        
+        if (!found) {
+            alert('Entry not found')
+            goto(`/pikku/${collection}`)
+            return
+        }
+
+        selectedEntry = structuredClone(found)
+        console.log(selectedEntry)
+        showEditItemSheet.set(true)
+    }
+
+    async function fetchItems() {
+        const res = await fetch(`/api/pikku/collections/${collection}`)
+        const json = await res.json()
+        entries = json.data || []
+        fields = json._config?.fields || []
+    }
+
+    onMount(async () => {
+        const res = await fetch(`/api/pikku/collections/${collection}`)
+        const json = await res.json()
+        entries = json.data || []
+        fields = json._config?.fields || []
+    })
 </script>
 
 <svelte:head>
@@ -92,12 +117,11 @@
 
 <div class="pikku-wrapper">
     <Sidebar/>
-    {#if $showEditFieldModal}
-        <EditFieldModal fields={fields} saveFields={saveFields}/>
-    {/if}
     <div class="pikku-main tabbed">
+        <!--main content header-->
         <div class="pikku-header tabbed">
             <div class="top-container">
+                <!-- breadcrumbs container -->
                 <div class="left-container">
                     <button on:click={() => goto('/pikku')} class="square-button" aria-label="back button">
                         <i class="bi bi-chevron-left"></i>
@@ -107,28 +131,31 @@
                     <p class="white-text">{collection}</p>
                 </div>
                 <div>
+                    <!-- items tab buttons -->
                     {#if tabContext === 'items'}
                         <button on:click={deleteCollection} class="secondary">Delete collection</button>
                         <button on:click={() => addItem()}>Add item</button>
                     {/if}
-
+                    <!-- fields tab buttons -->
                     {#if tabContext === 'fields'}
                         <button on:click={() => showEditFieldModal.set(true)}>Edit fields</button>
                     {/if}
                 </div>
             </div>
             <div class="bottom-container">
+                <!-- loop through tab buttons -->
                 {#each tabButtons as button}
                     <button on:click={() => setTab(button)} class={['tab-button', button === tabContext ? 'active' : '']}>{button}</button>
                 {/each}
             </div>
         </div>
+        <!-- main content -->
         <div class="pikku-content tabbed">
             {#if tabContext === 'items'} 
                 {#if entries.length === 0}
                     <!-- <p class="white-text">No entries yet.</p> -->
                 {:else}
-                    <TableCollectionEntries collection={collection} entries={entries} fields={fields}/>
+                    <TableCollectionEntries chooseEntry={chooseEntry} collection={collection} entries={entries} fields={fields}/>
                 {/if}
             {/if}
 
@@ -142,3 +169,12 @@
         </div>
     </div>
 </div>
+
+<!-- modals & sheets -->
+{#if $showEditItemSheet}
+    <EditItemSheet fields={fields} selectedEntry={selectedEntry} fetchItems={fetchItems}/>
+{/if}
+
+{#if $showEditFieldModal}
+    <EditFieldModal fields={fields} saveFields={saveFields}/>
+{/if}
