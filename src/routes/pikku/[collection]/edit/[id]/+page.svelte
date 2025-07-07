@@ -3,12 +3,17 @@
     import { page } from '$app/stores'
     import { goto } from '$app/navigation'
 
+    import { toast } from '../../../store';
+
+    import { showPickImageModal } from '../../../store';
+
     let fields = []
     let entry = {}
     let collection = $page.params.collection
     let id = $page.params.id
 
     import Sidebar from '../../../components/Sidebar.svelte';
+    import PickImageModal from '../../../components/PickImageModal.svelte';
 
     onMount(async () => {
         const res = await fetch(`/api/pikku/collections/${collection}`)
@@ -30,7 +35,7 @@
 
     onDestroy(() => {
         //remvoe save shortcut event listener
-        // document.removeEventListener('keydown', handleSaveShortcut);
+        document.removeEventListener('keydown', handleSaveShortcut);
     })
 
     function handleSaveShortcut(e) {
@@ -46,6 +51,15 @@
         }
     }
 
+    function handlePickImage(url) {
+        // Example: add single image URL to an array field
+        if (!entry.images) entry.images = [];
+        entry.images = [...entry.images, url];
+
+        // Close modal
+        showPickImageModal.set(false);
+    }
+
     async function save() {
         const res = await fetch(`/api/pikku/collections/${collection}/entries/${id}`, {
             method: 'PUT',
@@ -55,8 +69,9 @@
 
         if (res.ok) {
             goto(`/pikku/${collection}`)
+            toast('Item saved successfully.', 3000, 'success')
         } else {
-            alert('Failed to save.')
+            toast('Something went wrong when trying to save.', 3000, 'error')
         }
     }
 
@@ -70,8 +85,9 @@
 
         if (res.ok) {
             goto(`/pikku/${collection}`)
+            toast('Item deleted successfully.', 3000, 'success')
         } else {
-            alert('Failed to delete entry.')
+            toast('Failed to delete item.', 3000, 'error')
         }
     }
 </script>
@@ -104,7 +120,6 @@
             <form on:submit|preventDefault={save}>
                 {#each fields as field}
                     <div style="margin-bottom: 1.5rem;">
-                        <label>
                             <div class="label">{field.name}</div>
                             {#if field.type === 'text' || field.type === 'date'}
                                 <input
@@ -125,8 +140,21 @@
                                         <option value={option.value}>{option.label}</option>
                                     {/each}
                                 </select>
+                            {:else if field.type === 'image'}
+                                <div class="image-wrapper">
+                                    {#each entry.images as image, i}
+                                        <div class="image-container">
+                                            <img src={image} alt="thingy" height="100" width="100" draggable="false"/>
+                                            <button on:click={() => entry.images = [...entry.images.slice(0, i), ...entry.images.slice(i + 1)]} type="button" class="square-button" aria-label="delete image">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    {/each}
+                                    <button type="button" on:click={() => showPickImageModal.set(true)} class="secondary" aria-label="add image">
+                                        <i class="bi bi-plus"></i>
+                                    </button>
+                                </div>
                             {/if}
-                        </label>
                     </div>
                 {/each}
                 <button style="display: none" id="editSubmitButton" type="submit">Save Changes</button>
@@ -134,3 +162,7 @@
         </div>
     </div>
 </div>
+
+{#if $showPickImageModal}
+    <PickImageModal onPick={handlePickImage}/>
+{/if}

@@ -1,3 +1,5 @@
+// List and create collections
+
 import fs from 'fs/promises'
 import path from 'path'
 
@@ -5,8 +7,24 @@ const DATA_DIR = path.resolve('./static/data')
 
 export async function GET() {
     const files = await fs.readdir(DATA_DIR)
-    const jsonFiles = files.filter(f => f.endsWith('.json')).map(f => f.replace('.json', ''))
-    return new Response(JSON.stringify(jsonFiles), {
+    const jsonFiles = files.filter(f => f.endsWith('.json'))
+
+    const collections = await Promise.all(
+        jsonFiles.map(async (file) => {
+            const name = file.replace('.json', '')
+            const filePath = path.join(DATA_DIR, file)
+            const raw = await fs.readFile(filePath, 'utf-8')
+            const json = JSON.parse(raw)
+            const count = Array.isArray(json.data) ? json.data.length : 0
+
+            return {
+                name,
+                count
+            }
+        })
+    )
+
+    return new Response(JSON.stringify(collections), {
         headers: { 'Content-Type': 'application/json' }
     })
 }

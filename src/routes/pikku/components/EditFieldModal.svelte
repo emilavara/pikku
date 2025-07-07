@@ -30,6 +30,7 @@
                         <select bind:value={field.type}>
                             <option value="text">Text</option>
                             <option value="textarea">Textarea</option>
+                            <option value="image">Image</option>
                             <option value="checkbox">Checkbox</option>
                             <option value="select">Select</option>
                         </select>

@@ -2,7 +2,8 @@
     import { onMount } from 'svelte'
     import { goto } from '$app/navigation'
 
-    import { showCreateCollectionModal, showEditFieldModal } from '../store'
+    
+    import { showCreateCollectionModal, showEditFieldModal, toast } from '../store'
 
     import Sidebar from '../components/Sidebar.svelte';
     import TableCollectionEntries from '../components/TableCollectionEntries.svelte';
@@ -29,6 +30,12 @@
             body: JSON.stringify(json)
         })
 
+        if (res.ok) {
+            toast('Fields saved successfully.', 3000, 'success')
+        } else {
+            toast('Something went wrong trying to save fields.', 3000, 'error')
+        }
+
         showEditFieldModal.set(false)
     }
 
@@ -49,9 +56,10 @@
 
         if (res.ok) {
             alert('Collection deleted.')
+            toast('Collection deleted successfully.', 3000, 'success')
             goto('/pikku')
         } else {
-            alert('Failed to delete collection.')
+            toast('Failed to delete collection.', 3000, 'error')
         }
     }
 
